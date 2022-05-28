@@ -1,9 +1,12 @@
 import styled, { createGlobalStyle } from 'styled-components';
 
+import Sidebar from './components/Sidebar';
+
 function App() {
   return (
     <>
       <GlobalStyle />
+      <Sidebar/>
       <StyledDiv>
         Hi
       </StyledDiv>
