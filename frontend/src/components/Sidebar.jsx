@@ -3,10 +3,12 @@ import styled from "styled-components";
 import Fridge from "./Fridge";
 import IngreSearch from "./IngreSearch";
 import Title from "./shared/Title";
+import Logo from "./resources/FrigoLogo.svg"
 
 export default function Sidebar(props) {
     return (
         <SidebarWrapper>
+            <img src={Logo} width={"256px"}/>
             <Title>Add Ingredients</Title>
             <IngreSearch></IngreSearch>
             <Fridge></Fridge>
@@ -29,3 +31,4 @@ const SidebarWrapper = styled.div`
     border-bottom-right-radius: 16px;
     padding-bottom: 32px;
 `;
+
