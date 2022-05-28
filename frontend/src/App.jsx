@@ -24,7 +24,9 @@ export default function App() {
 
   useEffect(() => {
     baseApi.get('search/', {
-      params: state.ingredients
+      params: {
+        ingredients: state.ingredients
+      }
     }).then((res) => {
       console.log(res);
       console.log(res.data);
