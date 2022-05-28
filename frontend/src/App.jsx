@@ -2,19 +2,17 @@ import styled, { createGlobalStyle } from 'styled-components';
 
 import Sidebar from './components/Sidebar';
 
-function App() {
+export default function App() {
   return (
     <>
       <GlobalStyle />
       <Sidebar/>
       <StyledDiv>
-        Hi
+        H
       </StyledDiv>
     </>
   );
 }
-
-export default App;
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -28,4 +26,5 @@ const StyledDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: absolute;
 `;
