@@ -5,11 +5,31 @@ import Main from './components/main/Main';
 import Sidebar from './components/sidebar/Sidebar';
 import Modal from './components/Modal';
 
+import baseApi from './components/shared/baseApi';
+
 export default function App() {
   const [state, setState] = useState({
     ingredients: [],
+    recipes: [
+      {
+        title: 'Example Title',
+        time: '10 minutes',
+        ingredients: ['ingredient 1', 'ingredient 2', 'ingredient 3'],
+        tags: ['tag 1', 'tag 2', 'tag 3'],
+        directions: 'ajwiefo\nawjeifjasiodf\najweifjaoiwef\naweifuio\nawjeif',
+      }
+    ],
     displayModal: false,
   });
+
+  useEffect(() => {
+    baseApi.get('search/', {
+      params: state.ingredients
+    }).then((res) => {
+      console.log(res);
+      console.log(res.data);
+    });
+  }, [state.ingredients]);
 
   const toggleModal = () => {
     setState(prevState => ({
