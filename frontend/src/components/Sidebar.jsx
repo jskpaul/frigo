@@ -1,8 +1,12 @@
 import styled from "styled-components";
 
-export default function Sidebar() {
+import Title from "./shared/Title";
+
+export default function Sidebar(props) {
     return (
-        <SidebarWrapper></SidebarWrapper>
+        <SidebarWrapper>
+          <Title>Add Ingredients</Title>
+        </SidebarWrapper>
     )
 }
 
@@ -12,5 +16,7 @@ const SidebarWrapper = styled.div`
     position: absolute;
     top: 0;
     left: 0;
-    background: #FFE371; 
+    background: #FFE371;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
 `;
