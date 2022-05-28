@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import Fridge from "./Fridge";
 
+import Fridge from "./Fridge";
 import Title from "./shared/Title";
 
 export default function Sidebar(props) {
@@ -21,9 +21,8 @@ const SidebarWrapper = styled.div`
     background: #FFE371; 
     display: flex;
     flex-direction: column;
-    justify-content: space-around; //component content alignment
-    align-items: center;
+    align-items: center; //component content alignment
     background: #FFE371;
-    border-top-right-radius: 12px;
-    border-bottom-right-radius: 12px;
+    border-top-right-radius: 24px;
+    border-bottom-right-radius: 24px;
 `;
