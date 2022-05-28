@@ -1,12 +1,14 @@
 import styled from "styled-components";
 
 import Fridge from "./Fridge";
+import IngreSearch from "./IngreSearch";
 import Title from "./shared/Title";
 
 export default function Sidebar(props) {
     return (
         <SidebarWrapper>
             <Title>Add Ingredients</Title>
+            <IngreSearch></IngreSearch>
             <Fridge></Fridge>
         </SidebarWrapper>
     )
