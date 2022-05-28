@@ -1,19 +1,21 @@
 import styled from "styled-components";
 
 import Ingredient from "./Ingredient";
+import Tag from "../shared/Tag";
 
 export default function Fridge(props) {
     return (
         <FridgeBox>
             {props.ingredients.map((e, i) => {
                 return (
-                    <Ingredient
+                    <Tag
                         key={i}
                         id={e.id}
-                        removeIngredient={props.removeIngredient}
+                        removeItem={props.removeIngredient}
+                        color={'e0eca9aa'}
                     >
                         {e.val}
-                    </Ingredient>
+                    </Tag>
                 )
             })}
         </FridgeBox>
