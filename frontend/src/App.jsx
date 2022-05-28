@@ -1,17 +1,17 @@
 import styled, { createGlobalStyle } from 'styled-components';
 
-function App() {
+export default function App() {
+
+
   return (
     <>
       <GlobalStyle />
       <StyledDiv>
-        Hi
+        H
       </StyledDiv>
     </>
   );
 }
-
-export default App;
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -25,4 +25,5 @@ const StyledDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: absolute;
 `;
