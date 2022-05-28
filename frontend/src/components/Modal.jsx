@@ -30,8 +30,8 @@ const ModalContainer = styled.div`
 
 const ModalBox = styled.div`
     background: white;
-    height:300px;
-    width: 300px;
+    height: 80%;
+    width: 90%;
     border-radius: 16px;
     padding: 12px;
 `;

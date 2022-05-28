@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components"
-import Modal from "../Modal";
 
 import Title from "../shared/Title";
 import RecipeList from "./RecipeList";
@@ -26,6 +25,24 @@ export default function Main(props) {
     <Wrapper>
       <Title>Search Results</Title>
       <RecipeList>
+        {test.map((e, i) => {
+          return (
+            <Recipe
+              key={i}
+              title={e.title}
+              toggleModal={props.toggleModal}
+            />
+          )
+        })}
+        {test.map((e, i) => {
+          return (
+            <Recipe
+              key={i}
+              title={e.title}
+              toggleModal={props.toggleModal}
+            />
+          )
+        })}
         {test.map((e, i) => {
           return (
             <Recipe

@@ -15,7 +15,7 @@ export default function Sidebar(props) {
 }
 
 const SidebarWrapper = styled.div`
-    height: 100vh; 
+    height: calc(100vh - 32px); 
     width: 364px;
     position: absolute;
     top: 0;
@@ -27,4 +27,5 @@ const SidebarWrapper = styled.div`
     background: #FFE371;
     border-top-right-radius: 16px;
     border-bottom-right-radius: 16px;
+    padding-bottom: 32px;
 `;

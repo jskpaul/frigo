@@ -8,8 +8,8 @@ export default function Fridge() {
 
 const FridgeBox = styled.div`
     background: white;
-    height:300px;
     width: 300px;
+    flex: 1;
     border-radius: 16px;
     padding: 12px;
 `;
