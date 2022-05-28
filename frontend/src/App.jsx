@@ -13,12 +13,13 @@ export default function App() {
     recipes: [
       {
         title: 'Example Title',
-        time: '10 minutes',
+        minutes: 10,
         ingredients: ['ingredient 1', 'ingredient 2', 'ingredient 3'],
         tags: ['tag 1', 'tag 2', 'tag 3'],
         directions: 'ajwiefo\nawjeifjasiodf\najweifjaoiwef\naweifuio\nawjeif',
       }
     ],
+    index: 0,
     displayModal: false,
   });
 
@@ -80,6 +81,7 @@ export default function App() {
         visible={state.displayModal}
         invisible={!state.displayModal}
         show={() => {toggleModal()}}
+        recipe={state.recipes[state.index]}
       />
       <Sidebar
         ingredients={state.ingredients}
