@@ -86,7 +86,10 @@ export default function App() {
         addIngredient={(x) => addIngredient(x)}
         removeIngredient={(x) => removeIngredient(x)}
       />
-      <Main toggleModal={() => {toggleModal()}}/>
+      <Main
+        toggleModal={() => {toggleModal()}}
+        recipes={state.recipes}
+      />
     </>
   );
 }
