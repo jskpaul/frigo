@@ -23,6 +23,6 @@ const SidebarWrapper = styled.div`
     flex-direction: column;
     align-items: center; //component content alignment
     background: #FFE371;
-    border-top-right-radius: 24px;
-    border-bottom-right-radius: 24px;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
 `;

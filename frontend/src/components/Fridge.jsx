@@ -10,4 +10,6 @@ const FridgeBox = styled.div`
     background: white;
     height:300px;
     width: 300px;
+    border-radius: 16px;
+    padding: 12px;
 `;
