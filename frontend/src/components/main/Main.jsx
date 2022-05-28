@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import styled from "styled-components"
+import Modal from "../Modal";
 
 import Title from "../shared/Title";
 import RecipeList from "./RecipeList";
@@ -13,7 +14,7 @@ export default function Main(props) {
     <Wrapper>
       <Title>Search Results</Title>
       <RecipeList>
-        
+       
       </RecipeList>
     </Wrapper>
   )
