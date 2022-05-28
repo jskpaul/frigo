@@ -19,7 +19,7 @@ export default function IngreSearch(props) {
             <img src={icon} width={"24px"}/>
             <SearchInput
                 type="text"
-                placeholder="Add an ingredient!"
+                placeholder="Add an ingredient in your fridge!"
                 value={input}
                 onInput={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => handleKeyPress(e)}

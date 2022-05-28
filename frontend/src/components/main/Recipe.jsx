@@ -12,7 +12,7 @@ export default function Recipe(props) {
       <TextContainer>
         <Header>title: {props.title}</Header>
         <FlavorText>
-          Instructions: EJIFOJWEIOFJ
+          Ingredients: EJIFOJWEajsdkfljaskldjfkaskldjfkasdjklfjakwjfiadsjiofjaklsehfurwisjodbadwkjiofsioujiosudfjioewrjh9dejerwijo3pejpfdskjoiprdfjkoeprkfodspopewfndjpewnmodpswndmpswlqoefpdsjoskldjfkasdjklfjakwjfiadsjiofjaklsehfurwisjodbadwkjiofsioujiosudfjioewrjh9dejerwijo3pejpfdskjoiprdfjkoeprkfodspopewfndjpewnmodpswndmpswlqoefpdsjosdjklfjakwjfiadsjiofjaklsehfurwisjodbadwkjiofsioujiosudfjioewrjh9dejerwijo3pejpfdskjoiprdfjkoeprkfodspopewfndjpewnmodpswndmpswlqoefpdsjoIOFJ
         </FlavorText>
       </TextContainer>
       <IconContainer>
@@ -31,7 +31,9 @@ const Item = styled.div`
   margin: 12px;
   margin-top: 24px;
   margin-bottom: 24px;
-  padding: 15px;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  padding-right: 20px;
   padding-left: 20px;
   filter: drop-shadow(2px 3px 2px #696969);
   display: flex;
@@ -44,7 +46,7 @@ const TextContainer = styled.div`
 const Header = styled.div`
   font-weight: 600;
   color: #4f4b49;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 `;
 
 const FlavorText = styled.div`
@@ -52,10 +54,11 @@ const FlavorText = styled.div`
   font-size: 0.8em;
   max-width: calc(100% - 56px);
   max-height: 56px;
-  overflow-wrap: break-word;
   word-break: break-all;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;  
 `;
 
 const IconContainer = styled.div`
