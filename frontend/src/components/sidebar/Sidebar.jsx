@@ -2,11 +2,13 @@ import styled from "styled-components";
 
 import Fridge from "./Fridge";
 import IngreSearch from "./IngreSearch";
+import Logo from "../resources/FrigoLogo.svg";
 import Title from "../shared/Title";
 
 export default function Sidebar(props) {
     return (
         <SidebarWrapper>
+            <img src={Logo} width={"256px"}/>
             <Title>Add Ingredients</Title>
             <IngreSearch
               addIngredient={props.addIngredient}
@@ -34,3 +36,4 @@ const SidebarWrapper = styled.div`
     border-bottom-right-radius: 16px;
     padding-bottom: 32px;
 `;
+
