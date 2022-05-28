@@ -2,16 +2,21 @@ import styled from "styled-components";
 
 import Fridge from "./Fridge";
 import IngreSearch from "./IngreSearch";
-import Title from "./shared/Title";
-import Logo from "./resources/FrigoLogo.svg"
+import Logo from "../resources/FrigoLogo.svg";
+import Title from "../shared/Title";
 
 export default function Sidebar(props) {
     return (
         <SidebarWrapper>
             <img src={Logo} width={"256px"}/>
             <Title>Add Ingredients</Title>
-            <IngreSearch></IngreSearch>
-            <Fridge></Fridge>
+            <IngreSearch
+              addIngredient={props.addIngredient}
+            />
+            <Fridge
+              ingredients={props.ingredients}
+              removeIngredient={props.removeIngredient}
+            />
         </SidebarWrapper>
     )
 }
