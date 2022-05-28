@@ -6,48 +6,17 @@ import RecipeList from "./RecipeList";
 import Recipe from "./Recipe";
 
 export default function Main(props) {
-  const [test, setTest] = useState([
-    {
-      title: 'f'
-    },{
-      title: 'a'
-    },{
-      title: 'b'
-    },{
-      title: 'c'
-    },
-  ]);
-    
-  useEffect(() => {
-  });
-
   return (
     <Wrapper>
       <Title>Search Results</Title>
       <RecipeList>
-        {test.map((e, i) => {
+        {props.recipes.map((e, i) => {
           return (
             <Recipe
               key={i}
-              title={e.title}
-              toggleModal={props.toggleModal}
-            />
-          )
-        })}
-        {test.map((e, i) => {
-          return (
-            <Recipe
-              key={i}
-              title={e.title}
-              toggleModal={props.toggleModal}
-            />
-          )
-        })}
-        {test.map((e, i) => {
-          return (
-            <Recipe
-              key={i}
-              title={e.title}
+              index={i}
+              data={e}
+              setIndex={props.setIndex}
               toggleModal={props.toggleModal}
             />
           )

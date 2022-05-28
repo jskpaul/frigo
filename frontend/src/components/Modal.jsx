@@ -1,15 +1,45 @@
 import styled from "styled-components";
+
 import Title from "./shared/Title";
+import Tag from "./shared/Tag";
 
 export default function Modal(props) {
     const handleMouse = (e) => {
         props.show();
       }
     
+
     return (
         <ModalContainer visible={props.visible} onClick={() => handleMouse()}>
             <ModalBox onClick={e => e.stopPropagation()}>
-                <TitleBox>Hi</TitleBox></ModalBox></ModalContainer>
+                <Title>{props.recipe.title}</Title>
+
+                {props.recipe.tags.map((e, i) => {
+                    return (
+                        <Tag
+                            key={i}
+                            color={'FFE371'}
+                            id={i}
+                            removeItem={() => {console.log()}}
+                        >
+                            {e}
+                        </Tag>
+                    )
+                }) }
+                <IngredientBox>
+                    {props.recipe.ingredients.map((e, i) => {
+                        return (
+                            e
+                        )
+                    }) }
+                </IngredientBox>
+                <div>
+                    {props.recipe.directions}
+                </div>
+
+
+            </ModalBox>
+        </ModalContainer>
     )
 }
 
@@ -44,4 +74,10 @@ const TitleBox = styled.div`
     justify-content: center;
 
 
+`
+
+const IngredientBox = styled.div`
+    background: white;
+    display: flex;
+    flex-direction: row;
 `
