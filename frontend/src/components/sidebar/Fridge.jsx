@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-import Ingredient from "./Ingredient";
 import Tag from "../shared/Tag";
 
 export default function Fridge(props) {
@@ -13,6 +12,7 @@ export default function Fridge(props) {
                         id={e.id}
                         removeItem={props.removeIngredient}
                         color={'e0eca9aa'}
+                        remove
                     >
                         {e.val}
                     </Tag>

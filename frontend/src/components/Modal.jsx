@@ -1,5 +1,7 @@
 import styled from "styled-components";
+
 import Title from "./shared/Title";
+import Tag from "./shared/Tag";
 
 export default function Modal(props) {
     const handleMouse = (e) => {
@@ -14,7 +16,14 @@ export default function Modal(props) {
 
                 {props.recipe.tags.map((e, i) => {
                     return (
-                        <TagBox key={i}>{e}</TagBox>
+                        <Tag
+                            key={i}
+                            color={'FFE371'}
+                            id={i}
+                            removeItem={() => {console.log()}}
+                        >
+                            {e}
+                        </Tag>
                     )
                 }) }
                 <IngredientBox>
@@ -65,9 +74,6 @@ const TitleBox = styled.div`
     justify-content: center;
 
 
-`
-const TagBox = styled.div`
-    background: #FFE371
 `
 
 const IngredientBox = styled.div`

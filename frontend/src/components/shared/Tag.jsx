@@ -13,11 +13,13 @@ export default function Tag(props) {
         <Text>
           {props.children}
         </Text>
-        <Img
-          src={close}
-          width={'16px'}
-          onClick={() => {handleClick()}}
-        />
+        {props.remove &&
+          <Img
+            src={close}
+            width={'16px'}
+            onClick={() => {handleClick()}}
+          />
+        }
       </StyledTag>
     </Holder>
   )
