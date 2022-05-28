@@ -8,7 +8,7 @@ import Title from "../shared/Title";
 export default function Sidebar(props) {
     return (
         <SidebarWrapper>
-            <img src={Logo} width={"256px"}/>
+            <Img src={Logo} width={"256px"} />
             <Title>Add Ingredients</Title>
             <IngreSearch
               addIngredient={props.addIngredient}
@@ -37,3 +37,6 @@ const SidebarWrapper = styled.div`
     padding-bottom: 32px;
 `;
 
+const Img = styled.img`
+  margin-bottom: -28px;
+`;

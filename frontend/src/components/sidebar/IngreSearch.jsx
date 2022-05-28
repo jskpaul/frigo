@@ -16,7 +16,7 @@ export default function IngreSearch(props) {
 
     return (
         <IngredientSearch>
-            <img src={icon}/>
+            <img src={icon} width={"24px"}/>
             <SearchInput
                 type="text"
                 placeholder="Add an ingredient!"
@@ -30,19 +30,21 @@ export default function IngreSearch(props) {
 
 const IngredientSearch = styled.div`
     display: flex;
-    height: 32px;
+    height: 24px;
     width: 300px;
     flex-direction: row;
     padding: 12px;
     margin: 20px;
+    margin-top: 0px;
     border-radius: 16px;
     background: white;
 `
 
 const SearchInput = styled.input`
     border: none;
+    margin-left: 8px;
     :focus {
         outline: none;
     }
-
+    flex: 1;
 `
