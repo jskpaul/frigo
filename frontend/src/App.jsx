@@ -15,7 +15,7 @@ export default function App() {
   return (
     <>
       <GlobalStyle />
-      <Modal />
+      <Modal visible={displayModal} invisible={!displayModal} show={() => {toggleModal(!displayModal)}} />
       <Sidebar />
       <Main toggleModal={() => {toggleModal(!displayModal)}}/>
     </>

@@ -1,11 +1,15 @@
 import styled from "styled-components";
 import Title from "./shared/Title";
 
-export default function Modal() {
+export default function Modal(props) {
+    const handleMouse = (e) => {
+        props.show();
+      }
+    
     return (
-        <ModalContainer>
-            <ModalBox>
-                <Title>Hi</Title></ModalBox></ModalContainer>
+        <ModalContainer visible={props.visible} onClick={() => handleMouse()}>
+            <ModalBox onClick={e => e.stopPropagation()}>
+                <TitleBox>Hi</TitleBox></ModalBox></ModalContainer>
     )
 }
 
@@ -20,6 +24,8 @@ const ModalContainer = styled.div`
     align-items: center;
     justify-content: center;
     z-index: 1;
+    visibility: ${props => (props.visible ? 'visible' : 'hidden')};
+    
 `;
 
 const ModalBox = styled.div`
@@ -31,8 +37,11 @@ const ModalBox = styled.div`
 `;
 
 const TitleBox = styled.div`
-align-items: center;
-justify-content: center;
+    background: white;
+    height:200px;
+    width: 200px;
+    align-items: center;
+    justify-content: center;
 
 
 `
