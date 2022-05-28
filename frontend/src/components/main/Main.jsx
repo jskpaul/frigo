@@ -14,7 +14,9 @@ export default function Main(props) {
           return (
             <Recipe
               key={i}
-              title={e.title}
+              index={i}
+              data={e}
+              setIndex={props.setIndex}
               toggleModal={props.toggleModal}
             />
           )

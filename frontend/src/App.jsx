@@ -12,10 +12,17 @@ export default function App() {
     ingredients: [],
     recipes: [
       {
-        title: 'Example Title',
+        title: 'Example Title 1',
         minutes: 10,
         ingredients: ['ingredient 1', 'ingredient 2', 'ingredient 3'],
         tags: ['tag 1', 'tag 2', 'tag 3'],
+        directions: 'ajwiefo\nawjeifjasiodf\najweifjaoiwef\naweifuio\nawjeif',
+      },
+      {
+        title: 'Example Title 2',
+        minutes: 30,
+        ingredients: ['ingredient 4', 'ingredient 5', 'ingredient 6'],
+        tags: ['tag 1', 'tag 3', 'tag 4', 'tag 5'],
         directions: 'ajwiefo\nawjeifjasiodf\najweifjaoiwef\naweifuio\nawjeif',
       }
     ],
@@ -79,7 +86,6 @@ export default function App() {
       <GlobalStyle />
       <Modal
         visible={state.displayModal}
-        invisible={!state.displayModal}
         show={() => {toggleModal()}}
         recipe={state.recipes[state.index]}
       />
@@ -89,6 +95,10 @@ export default function App() {
         removeIngredient={(x) => removeIngredient(x)}
       />
       <Main
+        setIndex={(i) => setState(prevState => ({
+          ...prevState,
+          index: i,
+        }))}
         toggleModal={() => {toggleModal()}}
         recipes={state.recipes}
       />

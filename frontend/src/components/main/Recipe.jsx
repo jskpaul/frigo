@@ -4,20 +4,21 @@ import timer from '../resources/timer.svg';
 
 export default function Recipe(props) {
   const handleMouse = () => {
+    props.setIndex(props.index);
     props.toggleModal();
   }
 
   return (
     <Item onClick={() => handleMouse()}>
       <TextContainer>
-        <Header>title: {props.title}</Header>
+        <Header>title: {props.data.title}</Header>
         <FlavorText>
-          Ingredients: EJIFOJWEajsdkfljaskldjfkaskldjfkasdjklfjakwjfiadsjiofjaklsehfurwisjodbadwkjiofsioujiosudfjioewrjh9dejerwijo3pejpfdskjoiprdfjkoeprkfodspopewfndjpewnmodpswndmpswlqoefpdsjoskldjfkasdjklfjakwjfiadsjiofjaklsehfurwisjodbadwkjiofsioujiosudfjioewrjh9dejerwijo3pejpfdskjoiprdfjkoeprkfodspopewfndjpewnmodpswndmpswlqoefpdsjosdjklfjakwjfiadsjiofjaklsehfurwisjodbadwkjiofsioujiosudfjioewrjh9dejerwijo3pejpfdskjoiprdfjkoeprkfodspopewfndjpewnmodpswndmpswlqoefpdsjoIOFJ
+          Ingredients: {props.data.ingredients}
         </FlavorText>
       </TextContainer>
       <IconContainer>
         <img src={timer} width={'24px'} />
-         30 Minutes
+         {props.data.minutes} Minutes
       </IconContainer>
     </Item>
   );
