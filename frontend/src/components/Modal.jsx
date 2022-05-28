@@ -6,10 +6,31 @@ export default function Modal(props) {
         props.show();
       }
     
+
     return (
         <ModalContainer visible={props.visible} onClick={() => handleMouse()}>
             <ModalBox onClick={e => e.stopPropagation()}>
-                <TitleBox>Hi</TitleBox></ModalBox></ModalContainer>
+                <Title>{props.recipe.title}</Title>
+
+                {props.recipe.tags.map((e, i) => {
+                    return (
+                        <TagBox key={i}>{e}</TagBox>
+                    )
+                }) }
+                <IngredientBox>
+                    {props.recipe.ingredients.map((e, i) => {
+                        return (
+                            e
+                        )
+                    }) }
+                </IngredientBox>
+                <div>
+                    {props.recipe.directions}
+                </div>
+
+
+            </ModalBox>
+        </ModalContainer>
     )
 }
 
@@ -44,4 +65,13 @@ const TitleBox = styled.div`
     justify-content: center;
 
 
+`
+const TagBox = styled.div`
+    background: #FFE371
+`
+
+const IngredientBox = styled.div`
+    background: white;
+    display: flex;
+    flex-direction: row;
 `
