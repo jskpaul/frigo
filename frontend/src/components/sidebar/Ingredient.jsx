@@ -28,7 +28,7 @@ const Holder = styled.div`
 `;
 
 const Tag = styled.div`
-  background: #e0eca9;
+  background: #e0eca9aa;
   margin: 8px;
   padding: 8px;
   border-radius: 8px;
