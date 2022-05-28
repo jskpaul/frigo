@@ -20,7 +20,7 @@ export default function App() {
 
   const addIngredient = (x) => {
     if (!x) return;
-    
+
     let temp = state.ingredients.slice();
     for (let i = 0; i < state.ingredients.length; i++) {
       if (state.ingredients[i].val === x) {
@@ -73,6 +73,6 @@ const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     font-family: 'Open Sans', sans-serif;
-    background: #f1efe9;
+    background: #fff;
   }
 `;

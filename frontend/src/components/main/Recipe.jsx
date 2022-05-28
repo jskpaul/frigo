@@ -27,7 +27,7 @@ const Item = styled.div`
   width: calc(100% - 58px);
   max-height: 86px;
   border-radius: 16px;
-  background: #fff;
+  background: #fffefa;
   margin: 12px;
   margin-top: 24px;
   margin-bottom: 24px;
@@ -35,7 +35,7 @@ const Item = styled.div`
   padding-bottom: 24px;
   padding-right: 20px;
   padding-left: 20px;
-  filter: drop-shadow(2px 3px 2px #696969);
+  filter: drop-shadow(2px 4px 6px #69696933);
   display: flex;
 `;
 
