@@ -10,7 +10,6 @@ export default function RecipeList(props) {
 
 const Wrapper = styled.div`
   flex: 1;
-  background: red;
   width: calc(100% - 64px);
   margin-bottom: 36px;
   overflow-y: scroll;
