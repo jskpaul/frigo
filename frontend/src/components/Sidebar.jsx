@@ -1,9 +1,12 @@
 import styled from "styled-components";
 import Fridge from "./Fridge";
 
-export default function Sidebar() {
+import Title from "./shared/Title";
+
+export default function Sidebar(props) {
     return (
         <SidebarWrapper>
+            <Title>Add Ingredients</Title>
             <Fridge></Fridge>
         </SidebarWrapper>
     )
@@ -20,4 +23,7 @@ const SidebarWrapper = styled.div`
     flex-direction: column;
     justify-content: space-around; //component content alignment
     align-items: center;
+    background: #FFE371;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
 `;

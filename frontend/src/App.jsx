@@ -1,15 +1,14 @@
 import styled, { createGlobalStyle } from 'styled-components';
 
+import Main from './components/main/Main';
 import Sidebar from './components/Sidebar';
 
 export default function App() {
   return (
     <>
       <GlobalStyle />
-      <Sidebar/>
-      <StyledDiv>
-        H
-      </StyledDiv>
+      <Sidebar />
+      <Main />
     </>
   );
 }
@@ -18,13 +17,6 @@ const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     font-family: 'Open Sans', sans-serif;
+    background: #f2efe9;
   }
-`;
-
-const StyledDiv = styled.div`
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
 `;
