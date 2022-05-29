@@ -1,42 +1,53 @@
 import styled from "styled-components";
 
-import Title from "./shared/Title";
 import Tag from "./shared/Tag";
+import Timer from "./shared/Timer";
 
 export default function Modal(props) {
     const handleMouse = (e) => {
         props.show();
-      }
+    }
     
-
     return (
         <ModalContainer visible={props.visible} onClick={() => handleMouse()}>
             <ModalBox onClick={e => e.stopPropagation()}>
-                <Title>{props.recipe.title}</Title>
-
-                {props.recipe.tags.map((e, i) => {
-                    return (
-                        <Tag
-                            key={i}
-                            color={'FFE371'}
-                            id={i}
-                            removeItem={() => {console.log()}}
-                        >
-                            {e}
-                        </Tag>
-                    )
-                }) }
-                <IngredientBox>
-                    {props.recipe.ingredients.map((e, i) => {
+                <Title main>{props.recipe.title}</Title>
+                <TimerBox>
+                    <Timer big minutes={props.recipe.minutes} />
+                </TimerBox>
+                <Tagbar>
+                    {props.recipe.tags.map((e, i) => {
                         return (
-                            e
+                            <Tag
+                                key={i}
+                                color={'FFE371'}
+                                id={i}
+                                removeItem={() => {console.log()}}
+                            >
+                                {e}
+                            </Tag>
                         )
-                    }) }
-                </IngredientBox>
-                <div>
-                    {props.recipe.directions}
-                </div>
-
+                    })}
+                </Tagbar>
+                <Title>Ingredients</Title>
+                <IngredientAlign>
+                    <IngredientBox>
+                        {props.recipe.ingredients.map((e, i) => {
+                            let commaSeparation = i===0 ? '' : ', '
+                            return (
+                                commaSeparation + e
+                            )
+                        })}
+                    </IngredientBox>
+                </IngredientAlign>
+                <Title>Directions</Title>
+                {props.recipe.directions.map((e) => {
+                    return (
+                        <div>
+                            {e}
+                        </div>
+                    )
+                })}
 
             </ModalBox>
         </ModalContainer>
@@ -53,31 +64,57 @@ const ModalContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1;
+    z-index: 2;
     visibility: ${props => (props.visible ? 'visible' : 'hidden')};
     
 `;
 
 const ModalBox = styled.div`
-    background: white;
+    background: #FCFBF7;
     height: 80%;
-    width: 90%;
+    width: calc(90% - 72px);
     border-radius: 16px;
     padding: 12px;
+    padding-right: 36px;
+    padding-left: 36px;
+    position: relative;
 `;
 
-const TitleBox = styled.div`
-    background: white;
-    height:200px;
-    width: 200px;
-    align-items: center;
-    justify-content: center;
+const TimerBox = styled.div`
+    position: absolute;
+    top: 72px;
+    right: -42px;
+`;
 
-
-`
+const IngredientAlign = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: start;
+`;
 
 const IngredientBox = styled.div`
     background: white;
     display: flex;
     flex-direction: row;
-`
+    width: calc(100% - 48px);
+    padding: 24px;
+    border-radius: 12px;
+    filter: drop-shadow(2px 4px 6px #69696933);
+`;
+
+const Title = styled.div`
+    font-weight: 700;
+    font-size: ${props => props.main ? 2 : 1.5}em;
+    padding-top: 24px;
+    padding-bottom: 12px;
+    color: #492220;
+    display: flex;
+    justify-content: ${props => props.main ? 'center' : 'start'};
+`;
+
+const Tagbar = styled.div`
+    display: flex;
+    flex-direction: row;
+    margin-top: -8px;
+    margin-bottom: -8px;
+`;

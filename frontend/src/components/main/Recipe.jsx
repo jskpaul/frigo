@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import timer from '../resources/timer.svg';
+import Timer from "../shared/Timer";
 
 export default function Recipe(props) {
   const handleMouse = () => {
@@ -16,10 +16,7 @@ export default function Recipe(props) {
           Ingredients: {props.data.ingredients}
         </FlavorText>
       </TextContainer>
-      <IconContainer>
-        <img src={timer} width={'24px'} />
-         {props.data.minutes} Minutes
-      </IconContainer>
+      <Timer minutes={props.data.minutes} />
     </Item>
   );
 }
@@ -38,6 +35,7 @@ const Item = styled.div`
   padding-left: 20px;
   filter: drop-shadow(2px 4px 6px #69696933);
   display: flex;
+  cursor: pointer;
 `;
 
 const TextContainer = styled.div`

@@ -35,8 +35,9 @@ const SidebarWrapper = styled.div`
     border-top-right-radius: 16px;
     border-bottom-right-radius: 16px;
     padding-bottom: 32px;
+    z-index: 1;
 `;
 
 const Img = styled.img`
-  margin-bottom: -28px;
+  margin-bottom: -32px;
 `;
