@@ -32,13 +32,11 @@ const AddTagWrapper = styled.div`
 const AddTagunexpanded = styled.div`
     background:white;
 
-`
 
 const AddTagexpanded = styled.div`
     background:white;
     
 `
-
 const Arrow = styled.img`
     transform: rotate(${props => (props.expand? 90:0)}deg);
     transition: transform 0.05s;
