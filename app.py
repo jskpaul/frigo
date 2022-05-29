@@ -13,7 +13,9 @@ conn = psycopg2.connect("dbname=smallrecipes user=postgres password=4385")
 cursor = conn.cursor()
 cursor.execute("SELECT * FROM smallrecipe")
 rows = cursor.fetchall()
-
+@app.route("/")
+def index():
+    return "Hello World"
 @app.route('/search', methods=['GET'])
 def search():
     
@@ -44,7 +46,7 @@ def search():
 
 
     #cursor.execute("SELECT * FROM recipes WHERE name LIKE '%"+ingredients+"%'")
-    cursor.execute("SELECT * FROM public.recipes")
+    cursor.execute("SELECT * FROM recipes")
     rows = cursor.fetchall()
     rowdict = dict()
     #for count, row in enumerate(rows):
