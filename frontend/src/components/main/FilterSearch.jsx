@@ -23,6 +23,7 @@ export default function FilterSearch(props) {
             {expand &&
                 <AddTagexpanded>
                     <DropdownSearch unselected={props.unselected} tags={props.tags} addTag={props.addTag} />
+                    {!!props.tags.length && <Clear onClick={() => props.clearAll()}>Clear All</Clear>}
                     <TagHolder>
                         {props.tags.map((e, i) => {
                             return (
@@ -33,9 +34,7 @@ export default function FilterSearch(props) {
                                     color={'fee371'}
                                     remove
                                     animate
-                                >
-                                    {e}
-                                </Tag>
+                                >{e}</Tag>
                             )
                         })}
                     </TagHolder>
@@ -77,4 +76,12 @@ const TagHolder = styled.div`
     width: calc(100% - 64px);
     max-height: 150px;
     overflow-y: auto;
+`;
+
+const Clear = styled.div`
+    color: #4f4b49;
+    text-decoration: underline;
+    font-size: 0.8em;
+    margin-left: 12px;
+    cursor: pointer;
 `;

@@ -10,6 +10,9 @@ export default function DropdownSearch(props) {
 
   const handleKeyPress = (e) => {
     if (e.keyCode === 13) {
+      if (matches.length) {
+        handleMouse(matches[0]);
+      }
       setFocus(false);
       e.target.blur();
     }

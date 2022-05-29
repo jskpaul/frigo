@@ -29,8 +29,9 @@ export default function App() {
     ],
     recipes: [],
     index: 0,
-    unselected: ['test1', 'test2', 'z', 'bruh', 'what', '3432', 'hmmmm', 'ok'],
+    unselected: ['test1', 'test2', 'test2 5', 'z', 'bruh', 'what', '3432', 'hmmmm', 'ok'],
     displayModal: false,
+    clear: false,
     refresh: false,
   });
 
@@ -71,15 +72,29 @@ export default function App() {
   }
 
   useEffect(() => {
-    let x = state.tags.slice();
-    let y = state.unselected.slice();
-    x.sort();
-    y.sort();
-    setState(prevState => ({
-      ...prevState,
-      tags: x,
-      unselected: y,
-    }));
+    if (state.clear) {
+      let x = state.unselected.slice();
+      for (let i = 0; i < state.tags.length; i++) {
+        x.push(state.tags[i]);
+      }
+      setState(prevState => ({
+        ...prevState,
+        tags: [],
+        unselected: x,
+        clear: false,
+        refresh: !state.refresh,
+      }));
+    } else {
+      let x = state.tags.slice();
+      let y = state.unselected.slice();
+      x.sort();
+      y.sort();
+      setState(prevState => ({
+        ...prevState,
+        tags: x,
+        unselected: y,
+      }));
+    }
   }, [state.refresh]);
 
   const addIngredient = (x) => {
@@ -141,6 +156,14 @@ export default function App() {
     }));
   }
 
+  const clear = () => {
+    setState(prevState => ({
+      ...prevState,
+      refresh: !state.refresh,
+      clear: true,
+    }));
+  }
+
   return (
     <>
       <GlobalStyle />
@@ -164,6 +187,7 @@ export default function App() {
         tags={state.tags}
         addTag={(x) => addTag(x)}
         removeTag={(x) => removeTag(x)}
+        clearAll={() => clear()}
         toggleModal={() => {toggleModal()}}
         recipes={state.recipes}
       />

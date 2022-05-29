@@ -18,6 +18,7 @@ export default function Main(props) {
               tags={props.tags}
               addTag={props.addTag}
               removeTag={props.removeTag}
+              clearAll={props.clearAll}
             />
             <RecipeList>
               {props.recipes.length
