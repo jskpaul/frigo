@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import styled from "styled-components";
 
 import Timer from "../shared/Timer";
@@ -11,7 +12,7 @@ export default function Recipe(props) {
   return (
     <Item onClick={() => handleMouse()}>
       <TextContainer>
-        <Header>title: {props.data.title}</Header>
+        <Header>{props.data.title}</Header>
         <FlavorText>
           Ingredients: {
             props.data.ingredients.map((e, i) => {

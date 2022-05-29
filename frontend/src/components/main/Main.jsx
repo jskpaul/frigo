@@ -11,31 +11,36 @@ export default function Main(props) {
   return (
     <Wrapper>
       {props.ingredients
-        ? <>
-            <Title>Search Results</Title>
-            <FilterSearch
-              unselected={props.unselected}
-              tags={props.tags}
-              addTag={props.addTag}
-              removeTag={props.removeTag}
-              clearAll={props.clearAll}
-            />
-            <RecipeList>
-              {props.recipes.length
-              ? props.recipes.map((e, i) => {
-                return (
-                  <Recipe
-                    key={i}
-                    index={i}
-                    data={e}
-                    setIndex={props.setIndex}
-                    toggleModal={props.toggleModal}
-                  />
-                )
-              })
-              : <Alert>No results found...</Alert>}
-            </RecipeList>
-          </>
+        ? (props.loading
+          ? <VertAlign>
+              <Title>Loading...</Title>
+            </VertAlign>
+          : <>
+              <Title>Search Results</Title>
+              <FilterSearch
+                unselected={props.unselected}
+                tags={props.tags}
+                addTag={props.addTag}
+                removeTag={props.removeTag}
+                clearAll={props.clearAll}
+              />
+              <RecipeList>
+                {props.recipes.length
+                ? props.recipes.map((e, i) => {
+                  return (
+                    <Recipe
+                      key={i}
+                      index={i}
+                      data={e}
+                      setIndex={props.setIndex}
+                      toggleModal={props.toggleModal}
+                    />
+                  )
+                })
+                : <Alert>No results found...</Alert>}
+              </RecipeList>
+            </>
+          )
         : <VertAlign>
             <Title>Enter your ingredients</Title>
           </VertAlign>

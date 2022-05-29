@@ -71,8 +71,7 @@ const ModalContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 2;
-    
+    z-index: 2;  
 `;
 
 const ModalBox = styled.div`
@@ -90,7 +89,7 @@ const ModalBox = styled.div`
 
 const TimerBox = styled.div`
     position: absolute;
-    top: 72px;
+    top: 42px;
     right: -42px;
 `;
 
@@ -123,8 +122,8 @@ const Title = styled.div`
 const Tagbar = styled.div`
     display: flex;
     flex-direction: row;
-    margin-top: -8px;
-    margin-bottom: -8px;
+    margin-top: 8px;
+    flex-wrap: wrap;
 `;
 
 const DirContainer = styled.div`

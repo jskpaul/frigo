@@ -11,38 +11,61 @@ export default function App() {
   const [state, setState] = useState({
     ingredients: [],
     tags: [],
-    allRecipes: [
-      {
-        title: 'Example Title 1',
-        minutes: 10,
-        ingredients: ['ingredient 1', 'ingredient 2', 'ingredient 3'],
-        tags: ['tag 1', 'tag 2', 'tag 3', 'test2'],
-        directions: ['step 1', 'step 2', 'step 3'],
-      },
-      {
-        title: 'Example Title 2',
-        minutes: 30,
-        ingredients: ['ingredient 4', 'ingredient 5', 'ingredient 6'],
-        tags: ['tag 1', 'tag 3', 'tag 4', 'tag 5'],
-        directions: ['step 1', 'step 2', 'step 3', 'step 4', 'step 5'],
-      }
-    ],
+    allRecipes: [],
     recipes: [],
     index: 0,
     unselected: ['test1', 'test2', 'test2 5', 'z', 'bruh', 'what', '3432', 'hmmmm', 'ok'],
     displayModal: false,
     clear: false,
     refresh: false,
+    loading: false,
   });
 
   useEffect(() => {
-    baseApi.get('search/', {
-      params: {
-        ingredients: state.ingredients
+    setState(prevState => ({
+      ...prevState,
+      loading: true,
+    }));
+
+    const process = (resString) => {
+      let i = resString.replaceAll('"', '`');
+      i = i.replace("['", '["');
+      i = i.replace("']", '"]');
+      i = i.replaceAll(`', '`, '", "');
+      i = i.replaceAll(`", '`, '", "');
+      i = i.replaceAll(`', "`, '", "');
+      return JSON.parse(i);
+    }
+
+    baseApi.get(`search`, {
+      params: {'ingredients': state.ingredients.map((e) => {
+        return e.val;
+      }).join()}
+    })
+    .then(res => {
+      let temp = [];
+      for (let i in res.data) {
+        temp.push({
+          title: res.data[i][0].toLowerCase()
+            .split(' ')
+            .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+            .join(' '),
+          minutes: res.data[i][2],
+          ingredients: process(res.data[i][10]),
+          tags: process(res.data[i][5]),
+          directions: process(res.data[i][8]),
+        });
       }
-    }).then((res) => {
-      console.log(res);
-      console.log(res.data);
+      setState(prevState => ({
+        ...prevState,
+        allRecipes: temp,
+      }));
+    })
+    .catch(e => {
+      setState(prevState => ({
+        ...prevState,
+        loading: false,
+      }))
     });
   }, [state.ingredients]);
 
@@ -60,9 +83,10 @@ export default function App() {
     setState(prevState => ({
       ...prevState,
       recipes: temp,
+      loading: false,
     }));
     //let r = allRecipes.filter(e => e.tags.includes)
-  }, [state.ingredients, state.tags])
+  }, [state.allRecipes, state.tags])
 
   const toggleModal = () => {
     setState(prevState => ({
@@ -124,6 +148,7 @@ export default function App() {
         break;
       }
     }
+
     setState(prevState => ({
       ...prevState,
       ingredients: temp,
@@ -190,6 +215,7 @@ export default function App() {
         clearAll={() => clear()}
         toggleModal={() => {toggleModal()}}
         recipes={state.recipes}
+        loading={state.loading}
       />
     </>
   );
