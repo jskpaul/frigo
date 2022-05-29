@@ -17,7 +17,6 @@ export default function IngreSearch(props) {
                 props.addIngredient(input);
             }
             setInput('');
-            e.target.blur();
         }
     }
 

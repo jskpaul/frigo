@@ -14,6 +14,7 @@ export default function App() {
     recipes: [],
     index: 0,
     unselected: [],
+    timeFilter: 0,
     displayModal: false,
     clear: false,
     refresh: false,
@@ -27,7 +28,7 @@ export default function App() {
           ...prevState,
           unselected: Object.keys(res.data),
         }));
-      })
+      });
   }, []);
 
   useEffect(() => {
@@ -46,6 +47,7 @@ export default function App() {
       i = i.replaceAll("`, '", '", "');
       i = i.replaceAll("', `", '", "');
       i = i.replaceAll('`', `\\\"`);
+
       return JSON.parse(i);
     }
 
@@ -57,6 +59,10 @@ export default function App() {
 
     if (state.tags.length) {
       params['tags'] = state.tags.join();
+    }
+
+    if (state.timeFilter) {
+      params['time'] = [state.timeFilter].join();
     }
 
     baseApi.get(`search`, {
@@ -192,6 +198,13 @@ export default function App() {
     }));
   }
 
+  const clearIng = () => {
+    setState(prevState => ({
+      ...prevState,
+      ingredients: [],
+    }));
+  }
+
   return (
     <>
       <GlobalStyle />
@@ -204,6 +217,7 @@ export default function App() {
         ingredients={state.ingredients}
         addIngredient={(x) => addIngredient(x)}
         removeIngredient={(x) => removeIngredient(x)}
+        clearAll={() => clearIng()}
       />
       <Main
         ingredients={state.ingredients.length}
@@ -219,6 +233,11 @@ export default function App() {
         toggleModal={() => {toggleModal()}}
         recipes={state.recipes}
         loading={state.loading}
+        updateTime={(x) => setState(prevState => ({
+          ...prevState,
+          timeFilter: x,
+          refresh: !state.refresh,
+        }))}
       />
     </>
   );
