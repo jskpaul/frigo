@@ -19,30 +19,32 @@ cors = CORS(app)
 @app.route("/")
 def index():
     return "Hello World"
-@app.route('/search', methods=['GET'])
+@app.route('/search',methods=['GET'])
 def search():
+    ingcheck =request.args.get("ingredients")
+    if ingcheck == None:
+        return {}
+
+    tagcheck = request.args.get("tags")
+    notag = False
+    if tagcheck == None:
+        notag=True
+
     
+
     args = request.args
     ingredients = args['ingredients']
+    if not notag:
+        tags = args['tags']
+        taglist = tags.split(",")
+        tagdict = dict()
+        for tag in taglist: tagdict[tag.replace("%20", " ")] = "Yeeet"
+
     ingredlist = ingredients.split(",")
     ingdict = dict()
+    
     for ing in ingredlist: ingdict[ing.replace("%20", " ")] = "Yeeet"
-    '''
-    result = urlparse("postgresql://bkajobnssdigmz:9b2d5a529654f5da198abae2da464742c6f0525d4c52dc18c7041b5b5a3fd61b@ec2-44-196-223-128.compute-1.amazonaws.com:5432/de246nvqoro4o6")
-    username = result.username
-    password = result.password
-    database = result.path[1:]
-    hostname = result.hostname
-    port = result.port
-
-    conn = psycopg2.connect(
-        database = database,
-        user = username,
-        password = password,
-        host = hostname,
-        port = port
-    )
-    '''
+   
     conn = psycopg2.connect("postgresql://bkajobnssdigmz:9b2d5a529654f5da198abae2da464742c6f0525d4c52dc18c7041b5b5a3fd61b@ec2-44-196-223-128.compute-1.amazonaws.com:5432/de246nvqoro4o6", sslmode='require')
     
     cursor = conn.cursor()
@@ -55,6 +57,17 @@ def search():
     #for count, row in enumerate(rows):
         #rowdict[count] = row
     #return rowdict
+    def tagval(tags):
+        if notag:
+            return True
+        eval = True
+        newtags = tags[2:-2]
+        tags = newtags.split("', '")
+        for key in tagdict.keys():
+            if key not in tags:
+                eval = False
+        return eval
+
     for count, row in enumerate(rows):
         
         ings = row[10]
@@ -74,17 +87,19 @@ def search():
     counter = 0
     if 100 in rowdict.keys():
         for row in rowdict[100]:
-            realdict[counter]=row
-            counter = counter + 1
+            if tagval(row[5]):
+                realdict[counter]=row
+                counter = counter + 1
     
-    if counter > 5:
+    if counter > 20:
         return realdict
      
     for i in range(1,100):
         index = 100-i
         if index in rowdict.keys():
             for row in rowdict[index]:
-                realdict[counter] = row
-                counter = counter + 1
-                if counter > 5:
+                if tagval(row[5]):
+                    realdict[counter] = row
+                    counter = counter + 1
+                if counter > 20:
                     return realdict
