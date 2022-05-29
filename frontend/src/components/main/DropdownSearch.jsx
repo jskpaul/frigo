@@ -10,24 +10,38 @@ export default function DropdownSearch(props) {
 
   const handleKeyPress = (e) => {
     if (e.keyCode === 13) {
-      setFocus(false);
-      e.target.blur();
+      if (matches.length) {
+        handleMouse(matches[0]);
+      }
     }
   }
 
   const handleMouse = (id) => {
-    console.log(matches[id]);
-    props.addTag(id);
+    for (let i = 0; i < props.unselected.length; i++) {
+      if (props.unselected[i] === id) {
+        props.addTag(i);
+        break;
+      }
+    }
   }
 
   useEffect(() => {
-    let x = props.unselected.filter(e => e.includes(input));
+    let x = props.unselected.slice();
+    x = x.filter(e => e.includes(input));
 
     setMatches(x);
   }, [input, props])
 
   return (
     <Container>
+      <Time onChange={(e) => props.updateTime(e.target.value)}>
+        <option value={0}>Filter by Time</option>
+        <option value={1}>{'<'}15 mins</option>
+        <option value={2}>{'<'}30 mins</option>
+        <option value={3}>{'<'}1 hr</option>
+        <option value={4}>{'<'}2 hrs</option>
+        <option value={5}>{'>'}2 hrs</option>
+      </Time>
       <Bar>
         <img src={icon} width={"24px"}/>
         <SearchInput
@@ -43,7 +57,7 @@ export default function DropdownSearch(props) {
       <Matches show={focus}>
         {matches.map((e, i) => {
           return (
-            <Item key={i} even={i%2} onMouseDown={() => {handleMouse(i)}}>
+            <Item key={i} even={i%2} onMouseDown={() => {handleMouse(e)}}>
               {e}
             </Item>
           )
@@ -55,12 +69,14 @@ export default function DropdownSearch(props) {
 
 const Container = styled.div`
   position: relative;
+  margin-top: 8px;
+  margin-bottom: -16px;
 `;
 
 const Bar = styled.div`
   display: flex;
   height: 24px;
-  width: calc(100% - 400px);
+  width: calc(100% - 256px);
   min-width: 400px;
   flex-direction: row;
   padding: 12px;
@@ -88,7 +104,7 @@ const SearchInput = styled.input`
 
 const Matches = styled.div`
     position: absolute;
-    top: 36px;
+    top: px;
     left: 72px;;
     z-index: 1;
     filter: drop-shadow(2px 4px 6px #69696933);
@@ -108,4 +124,15 @@ const Item = styled.div`
     :hover {
       background: ${props => props.even ? '#edebe4' : '#ebebeb'};
     }
+`;
+
+const Time = styled.select`
+  width: 256px;
+  margin-left: 32px;
+  margin-top: 12px;
+  margin-bottom: 4px;
+  border: none;
+  background: none;
+  border-bottom: 1.7px solid #424242;
+  padding: 6px;
 `;

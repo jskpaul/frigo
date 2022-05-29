@@ -16,6 +16,7 @@ export default function Sidebar(props) {
             <Fridge
               ingredients={props.ingredients}
               removeIngredient={props.removeIngredient}
+              clearAll={props.clearAll}
             />
         </SidebarWrapper>
     )

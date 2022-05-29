@@ -43,7 +43,6 @@ const StyledTag = styled.div`
 `;
 
 const Text = styled.div`
-  max-width: 244px;
   text-overflow: ellipsis;
   overflow-x: hidden;
 `;

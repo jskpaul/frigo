@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
-const url= 'localhost:3001/search';
+const url= 'https://wildhacks-frigo.herokuapp.com//search';
 
 export default function API(props) {
   const [res, setRes] = useState();

@@ -1,21 +1,28 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
+import ChessModal from "./chess/ChessModal";
+
 import icon from '../resources/magnify.svg';
 
 export default function IngreSearch(props) {
     const [input, setInput] = useState('');
+    const [play, setPlay] = useState(false);
     
     const handleKeyPress = (e) => {
         if (e.keyCode === 13) {
-            props.addIngredient(input);
+            if (input === 'chess') {
+                setPlay(true);
+            } else {
+                props.addIngredient(input);
+            }
             setInput('');
-            e.target.blur();
         }
     }
 
     return (
         <IngredientSearch>
+            {play && <ChessModal exit={() => setPlay(false)} />}
             <img src={icon} width={"24px"}/>
             <SearchInput
                 type="text"
