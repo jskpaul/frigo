@@ -10,6 +10,7 @@ import baseApi from './components/shared/baseApi';
 export default function App() {
   const [state, setState] = useState({
     ingredients: [],
+    tags: ['a', 'b', 'best food', 'c'],
     recipes: [
       {
         title: 'Example Title 1',
@@ -27,6 +28,7 @@ export default function App() {
       }
     ],
     index: 0,
+    unselected: ['test1', 'test2', 'z', 'bruh', 'what', '3432', 'hmmmm', 'ok'],
     displayModal: false,
   });
 
@@ -47,6 +49,18 @@ export default function App() {
       displayModal: !state.displayModal,
     }))
   }
+
+  useEffect(() => {
+    let x = state.tags.slice();
+    let y = state.unselected.slice();
+    x.sort();
+    y.sort();
+    setState(prevState => ({
+      ...prevState,
+      tags: x,
+      unselected: y,
+    }));
+  }, [state.tags]);
 
   const addIngredient = (x) => {
     if (!x) return;
@@ -81,6 +95,30 @@ export default function App() {
     }));
   }
 
+  const addTag = (id) => {
+    let t = state.unselected.slice();
+    let next = state.tags.slice();
+    let move = t.splice(id, 1);
+    next.push(move[0]);
+    setState(prevState => ({
+      ...prevState,
+      tags: next,
+      unselected: t,
+    }));
+  }
+
+  const removeTag = (id) => {
+    let t = state.tags.slice();
+    let next = state.unselected.slice();
+    let move = t.splice(id, 1);
+    next.push(move[0]);
+    setState(prevState => ({
+      ...prevState,
+      tags: t,
+      unselected: next,
+    }));
+  }
+
   return (
     <>
       <GlobalStyle />
@@ -100,6 +138,10 @@ export default function App() {
           ...prevState,
           index: i,
         }))}
+        unselected={state.unselected}
+        tags={state.tags}
+        addTag={(x) => addTag(x)}
+        removeTag={(x) => removeTag(x)}
         toggleModal={() => {toggleModal()}}
         recipes={state.recipes}
       />

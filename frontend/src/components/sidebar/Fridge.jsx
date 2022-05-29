@@ -13,11 +13,13 @@ export default function Fridge(props) {
                         removeItem={props.removeIngredient}
                         color={'e0eca9aa'}
                         remove
+                        animate
                     >
                         {e.val}
                     </Tag>
                 )
             })}
+            {!props.ingredients.length && <Text>Your fridge is empty!</Text>}
         </FridgeBox>
     )
 }
@@ -28,4 +30,9 @@ const FridgeBox = styled.div`
     flex: 1;
     border-radius: 16px;
     padding: 12px;
+`;
+
+const Text = styled.div`
+    margin: 8px;
+    color: #4f4b49;
 `;
