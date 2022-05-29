@@ -1,24 +1,22 @@
 import styled from "styled-components";
 
-import timer from '../resources/timer.svg';
+import Timer from "../shared/Timer";
 
 export default function Recipe(props) {
   const handleMouse = () => {
+    props.setIndex(props.index);
     props.toggleModal();
   }
 
   return (
     <Item onClick={() => handleMouse()}>
       <TextContainer>
-        <Header>title: {props.title}</Header>
+        <Header>title: {props.data.title}</Header>
         <FlavorText>
-          Ingredients: EJIFOJWEajsdkfljaskldjfkaskldjfkasdjklfjakwjfiadsjiofjaklsehfurwisjodbadwkjiofsioujiosudfjioewrjh9dejerwijo3pejpfdskjoiprdfjkoeprkfodspopewfndjpewnmodpswndmpswlqoefpdsjoskldjfkasdjklfjakwjfiadsjiofjaklsehfurwisjodbadwkjiofsioujiosudfjioewrjh9dejerwijo3pejpfdskjoiprdfjkoeprkfodspopewfndjpewnmodpswndmpswlqoefpdsjosdjklfjakwjfiadsjiofjaklsehfurwisjodbadwkjiofsioujiosudfjioewrjh9dejerwijo3pejpfdskjoiprdfjkoeprkfodspopewfndjpewnmodpswndmpswlqoefpdsjoIOFJ
+          Ingredients: {props.data.ingredients}
         </FlavorText>
       </TextContainer>
-      <IconContainer>
-        <img src={timer} width={'24px'} />
-         30 Minutes
-      </IconContainer>
+      <Timer minutes={props.data.minutes} />
     </Item>
   );
 }
@@ -37,6 +35,7 @@ const Item = styled.div`
   padding-left: 20px;
   filter: drop-shadow(2px 4px 6px #69696933);
   display: flex;
+  cursor: pointer;
 `;
 
 const TextContainer = styled.div`

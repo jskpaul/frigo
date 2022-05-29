@@ -2,23 +2,25 @@ import styled from 'styled-components';
 
 import close from '../resources/close.svg';
 
-export default function Ingredient(props) {
+export default function Tag(props) {
   const handleClick = () => {
-    props.removeIngredient(props.id)
+    props.removeItem(props.id)
   }
 
   return (
     <Holder>
-      <Tag>
+      <StyledTag color={props.color}>
         <Text>
           {props.children}
         </Text>
-        <Img
-          src={close}
-          width={'16px'}
-          onClick={() => {handleClick()}}
-        />
-      </Tag>
+        {props.remove &&
+          <Img
+            src={close}
+            width={'16px'}
+            onClick={() => {handleClick()}}
+          />
+        }
+      </StyledTag>
     </Holder>
   )
 }
@@ -27,8 +29,8 @@ const Holder = styled.div`
   display: inline-block;
 `;
 
-const Tag = styled.div`
-  background: #e0eca9aa;
+const StyledTag = styled.div`
+  background: #${props => props.color};
   margin: 8px;
   padding: 8px;
   border-radius: 8px;

@@ -1,58 +1,34 @@
 import { useEffect, useState } from "react";
-import styled from "styled-components"
+import styled, { keyframes } from "styled-components"
 
 import Title from "../shared/Title";
 import RecipeList from "./RecipeList";
 import Recipe from "./Recipe";
 
 export default function Main(props) {
-  const [test, setTest] = useState([
-    {
-      title: 'f'
-    },{
-      title: 'a'
-    },{
-      title: 'b'
-    },{
-      title: 'c'
-    },
-  ]);
-    
-  useEffect(() => {
-  });
-
   return (
     <Wrapper>
-      <Title>Search Results</Title>
-      <RecipeList>
-        {test.map((e, i) => {
-          return (
-            <Recipe
-              key={i}
-              title={e.title}
-              toggleModal={props.toggleModal}
-            />
-          )
-        })}
-        {test.map((e, i) => {
-          return (
-            <Recipe
-              key={i}
-              title={e.title}
-              toggleModal={props.toggleModal}
-            />
-          )
-        })}
-        {test.map((e, i) => {
-          return (
-            <Recipe
-              key={i}
-              title={e.title}
-              toggleModal={props.toggleModal}
-            />
-          )
-        })}
-      </RecipeList>
+      {props.ingredients
+        ? <>
+            <Title>Search Results</Title>
+            <RecipeList>
+              {props.recipes.map((e, i) => {
+                return (
+                  <Recipe
+                    key={i}
+                    index={i}
+                    data={e}
+                    setIndex={props.setIndex}
+                    toggleModal={props.toggleModal}
+                  />
+                )
+              })}
+            </RecipeList>
+          </>
+        : <VertAlign>
+            <Title>Enter your ingredients</Title>
+          </VertAlign>
+      }
     </Wrapper>
   )
 }
@@ -61,10 +37,31 @@ export default function Main(props) {
 const Wrapper = styled.div`
   position: absolute;
   top: 0px;
-  left: 364px;
+  left: 0px;
+  padding-left: 364px;
   width: calc(100vw - 364px);
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-y: hidden;
+`;
+
+const fadeIn = keyframes`
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+`;
+
+const VertAlign = styled.div`
+  display: flex;
+  align-items: center;
+  height: 100%;
+  animation: ${fadeIn} 1s ease-out;
 `;

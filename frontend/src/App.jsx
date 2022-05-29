@@ -5,11 +5,41 @@ import Main from './components/main/Main';
 import Sidebar from './components/sidebar/Sidebar';
 import Modal from './components/Modal';
 
+import baseApi from './components/shared/baseApi';
+
 export default function App() {
   const [state, setState] = useState({
     ingredients: [],
+    recipes: [
+      {
+        title: 'Example Title 1',
+        minutes: 10,
+        ingredients: ['ingredient 1', 'ingredient 2', 'ingredient 3'],
+        tags: ['tag 1', 'tag 2', 'tag 3'],
+        directions: ['step 1', 'step 2', 'step 3'],
+      },
+      {
+        title: 'Example Title 2',
+        minutes: 30,
+        ingredients: ['ingredient 4', 'ingredient 5', 'ingredient 6'],
+        tags: ['tag 1', 'tag 3', 'tag 4', 'tag 5'],
+        directions: ['step 1', 'step 2', 'step 3', 'step 4', 'step 5'],
+      }
+    ],
+    index: 0,
     displayModal: false,
   });
+
+  useEffect(() => {
+    baseApi.get('search/', {
+      params: {
+        ingredients: state.ingredients
+      }
+    }).then((res) => {
+      console.log(res);
+      console.log(res.data);
+    });
+  }, [state.ingredients]);
 
   const toggleModal = () => {
     setState(prevState => ({
@@ -56,15 +86,23 @@ export default function App() {
       <GlobalStyle />
       <Modal
         visible={state.displayModal}
-        invisible={!state.displayModal}
         show={() => {toggleModal()}}
+        recipe={state.recipes[state.index]}
       />
       <Sidebar
         ingredients={state.ingredients}
         addIngredient={(x) => addIngredient(x)}
         removeIngredient={(x) => removeIngredient(x)}
       />
-      <Main toggleModal={() => {toggleModal()}}/>
+      <Main
+        ingredients={state.ingredients.length}
+        setIndex={(i) => setState(prevState => ({
+          ...prevState,
+          index: i,
+        }))}
+        toggleModal={() => {toggleModal()}}
+        recipes={state.recipes}
+      />
     </>
   );
 }
