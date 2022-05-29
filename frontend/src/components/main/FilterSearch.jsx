@@ -18,7 +18,7 @@ export default function FilterSearch(props) {
         <AddTagWrapper>
             <AddTagunexpanded onClick={()=>{setExpand(!expand)}}>
                 <Arrow expand={expand} src={rightarrow} width={"8px"}/>
-                Add Tags!
+                    Filter with tags
                 </AddTagunexpanded>
             {expand &&
                 <AddTagexpanded>
@@ -74,7 +74,7 @@ const Arrow = styled.img`
 
 const TagHolder = styled.div`
     width: calc(100% - 64px);
-    max-height: 150px;
+    max-height: 162px;
     overflow-y: auto;
 `;
 
@@ -84,4 +84,5 @@ const Clear = styled.div`
     font-size: 0.8em;
     margin-left: 12px;
     cursor: pointer;
+    width: 50px;
 `;
