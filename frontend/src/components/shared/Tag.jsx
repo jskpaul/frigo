@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 import close from '../resources/close.svg';
 
-import { fadeIn } from './animations';
+import { onlyFade } from './animations';
 
 export default function Tag(props) {
   const handleClick = () => {
@@ -39,7 +39,7 @@ const StyledTag = styled.div`
   display: flex;
   align-items: center;
   width: fit-content;
-  animation: ${props => props.animate ? css`${fadeIn} 0.5s ease` : 'none'};
+  animation: ${props => props.animate ? css`${onlyFade} 0.5s ease` : 'none'};
 `;
 
 const Text = styled.div`

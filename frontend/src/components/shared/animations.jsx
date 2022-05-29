@@ -12,6 +12,17 @@ const fadeIn = keyframes`
   }
 `;
 
+const onlyFade = keyframes`
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+`;
+
 export {
-  fadeIn
+  fadeIn,
+  onlyFade,
 }
