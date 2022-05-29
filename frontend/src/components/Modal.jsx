@@ -9,51 +9,55 @@ export default function Modal(props) {
     }
     
     return (
-        <ModalContainer visible={props.visible} onClick={() => handleMouse()}>
-            <ModalBox onClick={e => e.stopPropagation()}>
-                <Title main>{props.recipe.title}</Title>
-                <TimerBox>
-                    <Timer big minutes={props.recipe.minutes} />
-                </TimerBox>
-                <Tagbar>
-                    {props.recipe.tags.map((e, i) => {
-                        return (
-                            <Tag
-                                key={i}
-                                color={'FFE371'}
-                                id={i}
-                                removeItem={() => {console.log()}}
-                            >
-                                {e}
-                            </Tag>
-                        )
-                    })}
-                </Tagbar>
-                <Title>Ingredients</Title>
-                <IngredientAlign>
-                    <IngredientBox>
-                        {props.recipe.ingredients.map((e, i) => {
-                            let commaSeparation = i===0 ? '' : ', '
+        <>
+        {props.visible &&
+            <ModalContainer onClick={() => handleMouse()}>
+                <ModalBox onClick={e => e.stopPropagation()}>
+                    <Title main>{props.recipe.title}</Title>
+                    <TimerBox>
+                        <Timer big minutes={props.recipe.minutes} />
+                    </TimerBox>
+                    <Tagbar>
+                        {props.recipe.tags.map((e, i) => {
                             return (
-                                commaSeparation + e
-                            )
-                        })}
-                    </IngredientBox>
-                </IngredientAlign>
-                <Title>Directions</Title>
-                <DirContainer>
-                    <Directions>
-                        {props.recipe.directions.map((e, i) => {
-                            return (
-                                <Dir key={i}>
+                                <Tag
+                                    key={i}
+                                    color={'FFE371'}
+                                    id={i}
+                                    removeItem={() => {console.log()}}
+                                >
                                     {e}
-                                </Dir>
+                                </Tag>
                             )
                         })}
-                    </Directions>
-                </DirContainer>
-            </ModalBox>
-        </ModalContainer>
+                    </Tagbar>
+                    <Title>Ingredients</Title>
+                    <IngredientAlign>
+                        <IngredientBox>
+                            {props.recipe.ingredients.map((e, i) => {
+                                let commaSeparation = i===0 ? '' : ', '
+                                return (
+                                    commaSeparation + e
+                                )
+                            })}
+                        </IngredientBox>
+                    </IngredientAlign>
+                    <Title>Directions</Title>
+                    <DirContainer>
+                        <Directions>
+                            {props.recipe.directions.map((e, i) => {
+                                return (
+                                    <Dir key={i}>
+                                        {e}
+                                    </Dir>
+                                )
+                            })}
+                        </Directions>
+                    </DirContainer>
+                </ModalBox>
+            </ModalContainer>
+        }
+        </>
     )
 }
 
@@ -68,7 +72,6 @@ const ModalContainer = styled.div`
     align-items: center;
     justify-content: center;
     z-index: 2;
-    visibility: ${props => (props.visible ? 'visible' : 'hidden')};
     
 `;
 

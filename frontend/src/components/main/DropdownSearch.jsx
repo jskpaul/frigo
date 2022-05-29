@@ -16,12 +16,17 @@ export default function DropdownSearch(props) {
   }
 
   const handleMouse = (id) => {
-    console.log(matches[id]);
-    props.addTag(id);
+    for (let i = 0; i < props.unselected.length; i++) {
+      if (props.unselected[i] === id) {
+        props.addTag(i);
+        break;
+      }
+    }
   }
 
   useEffect(() => {
-    let x = props.unselected.filter(e => e.includes(input));
+    let x = props.unselected.slice();
+    x = x.filter(e => e.includes(input));
 
     setMatches(x);
   }, [input, props])
@@ -43,7 +48,7 @@ export default function DropdownSearch(props) {
       <Matches show={focus}>
         {matches.map((e, i) => {
           return (
-            <Item key={i} even={i%2} onMouseDown={() => {handleMouse(i)}}>
+            <Item key={i} even={i%2} onMouseDown={() => {handleMouse(e)}}>
               {e}
             </Item>
           )
@@ -55,6 +60,8 @@ export default function DropdownSearch(props) {
 
 const Container = styled.div`
   position: relative;
+  margin-top: 12px;
+  margin-bottom: -16px;
 `;
 
 const Bar = styled.div`

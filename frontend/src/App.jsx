@@ -10,13 +10,13 @@ import baseApi from './components/shared/baseApi';
 export default function App() {
   const [state, setState] = useState({
     ingredients: [],
-    tags: ['a', 'b', 'best food', 'c'],
-    recipes: [
+    tags: [],
+    allRecipes: [
       {
         title: 'Example Title 1',
         minutes: 10,
         ingredients: ['ingredient 1', 'ingredient 2', 'ingredient 3'],
-        tags: ['tag 1', 'tag 2', 'tag 3'],
+        tags: ['tag 1', 'tag 2', 'tag 3', 'test2'],
         directions: ['step 1', 'step 2', 'step 3'],
       },
       {
@@ -27,9 +27,11 @@ export default function App() {
         directions: ['step 1', 'step 2', 'step 3', 'step 4', 'step 5'],
       }
     ],
+    recipes: [],
     index: 0,
     unselected: ['test1', 'test2', 'z', 'bruh', 'what', '3432', 'hmmmm', 'ok'],
     displayModal: false,
+    refresh: false,
   });
 
   useEffect(() => {
@@ -42,6 +44,24 @@ export default function App() {
       console.log(res.data);
     });
   }, [state.ingredients]);
+
+  useEffect(() => {
+    let temp = state.allRecipes.slice();
+    for (let i = temp.length - 1; i >= 0; i--) {
+      for (let j = 0; j < state.tags.length; j++) {
+        if (!temp[i].tags.includes(state.tags[j])) {
+          temp.splice(i, 1);
+          break;
+        }
+      }
+    }
+
+    setState(prevState => ({
+      ...prevState,
+      recipes: temp,
+    }));
+    //let r = allRecipes.filter(e => e.tags.includes)
+  }, [state.ingredients, state.tags])
 
   const toggleModal = () => {
     setState(prevState => ({
@@ -60,7 +80,7 @@ export default function App() {
       tags: x,
       unselected: y,
     }));
-  }, [state.tags]);
+  }, [state.refresh]);
 
   const addIngredient = (x) => {
     if (!x) return;
@@ -104,6 +124,7 @@ export default function App() {
       ...prevState,
       tags: next,
       unselected: t,
+      refresh: !state.refresh,
     }));
   }
 
@@ -116,6 +137,7 @@ export default function App() {
       ...prevState,
       tags: t,
       unselected: next,
+      refresh: !state.refresh,
     }));
   }
 

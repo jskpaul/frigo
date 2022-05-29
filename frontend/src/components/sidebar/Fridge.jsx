@@ -30,6 +30,7 @@ const FridgeBox = styled.div`
     flex: 1;
     border-radius: 16px;
     padding: 12px;
+    overflow-y: auto;
 `;
 
 const Text = styled.div`

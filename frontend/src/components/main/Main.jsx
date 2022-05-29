@@ -20,7 +20,7 @@ export default function Main(props) {
               removeTag={props.removeTag}
             />
             <RecipeList>
-              {props.recipes
+              {props.recipes.length
               ? props.recipes.map((e, i) => {
                 return (
                   <Recipe
