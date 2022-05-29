@@ -103,3 +103,4 @@ def search():
                     counter = counter + 1
                 if counter > 20:
                     return realdict
+    return {}
