@@ -3,6 +3,8 @@ import styled from "styled-components"
 import Title from "../shared/Title";
 import RecipeList from "./RecipeList";
 import Recipe from "./Recipe";
+import FilterSearch from "./filter/FilterSearch";
+
 import { fadeIn } from '../shared/animations';
 
 export default function Main(props) {
@@ -11,6 +13,7 @@ export default function Main(props) {
       {props.ingredients
         ? <>
             <Title>Search Results</Title>
+            <FilterSearch></FilterSearch>
             <RecipeList>
               {props.recipes.map((e, i) => {
                 return (
