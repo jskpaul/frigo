@@ -20,6 +20,7 @@ export default function Main(props) {
               removeTag={props.removeTag}
               clearAll={props.clearAll}
               updateTime={props.updateTime}
+              time={props.time}
             />
             <RecipeList>
               {(props.loading)

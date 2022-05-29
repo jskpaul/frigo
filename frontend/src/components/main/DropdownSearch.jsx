@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 import icon from '../resources/magnify.svg';
 
+const times = ['<15 mins', '<30 mins', '<1 hr', '<2 hrs', '>2 hrs'];
+
 export default function DropdownSearch(props) {
   const [focus, setFocus] = useState(false);
   const [input, setInput] = useState('');
@@ -32,15 +34,25 @@ export default function DropdownSearch(props) {
     setMatches(x);
   }, [input, props])
 
+  const handleUpdate = (i) => {
+    if (i === props.time) {
+      props.updateTime(0);
+    } else {
+      props.updateTime(i);
+    }
+  }
+
   return (
     <Container>
-      <Time onChange={(e) => props.updateTime(e.target.value)}>
-        <option value={0}>Filter by Time</option>
-        <option value={1}>{'<'}15 mins</option>
-        <option value={2}>{'<'}30 mins</option>
-        <option value={3}>{'<'}1 hr</option>
-        <option value={4}>{'<'}2 hrs</option>
-        <option value={5}>{'>'}2 hrs</option>
+      <Time>
+        Filter By Time: 
+        {times.map((e, i) => {
+          return (
+            <StupidFuckingButtons key={i} selected={i+1 === props.time} onClick={() => handleUpdate(i + 1)}>
+              {e}
+            </StupidFuckingButtons>
+          )
+        })}
       </Time>
       <Bar>
         <img src={icon} width={"24px"}/>
@@ -69,7 +81,7 @@ export default function DropdownSearch(props) {
 
 const Container = styled.div`
   position: relative;
-  margin-top: 8px;
+  margin-top: 16px;
   margin-bottom: -16px;
 `;
 
@@ -104,8 +116,8 @@ const SearchInput = styled.input`
 
 const Matches = styled.div`
     position: absolute;
-    top: px;
-    left: 72px;;
+    top: 92px;
+    left: 64px;;
     z-index: 1;
     filter: drop-shadow(2px 4px 6px #69696933);
     overflow-y: auto;
@@ -126,13 +138,29 @@ const Item = styled.div`
     }
 `;
 
-const Time = styled.select`
-  width: 256px;
+const Time = styled.div`
+  width: 548px;
   margin-left: 32px;
   margin-top: 12px;
   margin-bottom: 4px;
   border: none;
   background: none;
-  border-bottom: 1.7px solid #424242;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding: 6px;
+  font-size: 12px;
+  font-weight: 400;
+`;
+
+const StupidFuckingButtons = styled.div`
+  width: 74px;
+  height: 32px;
+  border-radius: 12px;
+  background: ${props => props.selected ? '#cdcdcd' : '#ebebeb'};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 600;
 `;

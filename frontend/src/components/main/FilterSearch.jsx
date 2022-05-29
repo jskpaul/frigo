@@ -31,6 +31,7 @@ export default function FilterSearch(props) {
                         tags={props.tags}
                         addTag={props.addTag}
                         updateTime={props.updateTime}
+                        time={props.time}
                     />
                     {!!props.tags.length && <Clear onClick={() => handleClear()}>Clear All</Clear>}
                     <TagHolder>

@@ -39,16 +39,37 @@ export default function App() {
 
     const process = (resString) => {
       let i = resString.replaceAll('"', '`');
-      i = i.replace("['", '["');
-      i = i.replace("']", '"]');
-      i = i.replace("[`", '["');
-      i = i.replace("`]", '"]');
+      i = i.replace("['", '"');
+      i = i.replace("']", '"');
+      i = i.replace("[`", '"');
+      i = i.replace("`]", '"');
       i = i.replaceAll(`', '`, '", "');
       i = i.replaceAll("`, '", '", "');
       i = i.replaceAll("', `", '", "');
-      i = i.replaceAll('`', `\\\"`);
+      i = i.replaceAll("`, `", '", "');
+      console.log(i);
 
-      return JSON.parse(i);
+      let arr = [];
+      let temp = '';
+      let reading = true;
+      for (let j = 1; j < i.length; j++) {
+        if (reading) {
+          temp += i[j];
+        }
+        if (i[j + 1] === '"') {
+          reading = !reading;
+          if (!reading) {
+            arr.push(temp.replaceAll('`', '"'));
+            temp = '';
+          } else if (reading) {
+            j++;
+          }
+        }
+      }
+
+      console.log(arr);
+      
+      return arr;
     }
 
     let params = {
@@ -238,6 +259,7 @@ export default function App() {
           timeFilter: x,
           refresh: !state.refresh,
         }))}
+        time={state.timeFilter}
       />
     </>
   );
