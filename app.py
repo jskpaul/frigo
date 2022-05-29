@@ -5,6 +5,8 @@ from flask_cors import CORS
 
 import sys
 import math
+
+from sqlalchemy import true
 app = Flask(__name__)
 cors = CORS(app)
 
@@ -49,7 +51,12 @@ def search():
         notag=True
 
     
+    timecheck = request.args.get("time")
 
+    
+    if timecheck == None:
+        timecheck = 0
+    
     args = request.args
     ingredients = args['ingredients']
     if not notag:
@@ -86,6 +93,24 @@ def search():
                 eval = False
         return eval
 
+    def passtime(time, timeindex):
+        time = int(time)
+        timeindex = int(timeindex)
+        if timeindex == 0:
+            return True
+        elif time >= 0 and time <= 15 and timeindex == 1:
+            return True
+        elif time >= 16 and time <= 30 and timeindex == 2:
+            return True
+        elif time >= 31 and time <= 60 and timeindex == 3:
+            return True
+        elif time >= 61 and time <= 120 and timeindex == 4:
+            return True
+        elif time >= 121 and timeindex == 5:
+            return True
+        else:
+            return False
+
     for count, row in enumerate(rows):
         
         ings = row[10]
@@ -105,7 +130,7 @@ def search():
     counter = 0
     if 100 in rowdict.keys():
         for row in rowdict[100]:
-            if tagval(row[5]):
+            if tagval(row[5]) and passtime(row[2], timecheck):
                 realdict[counter]=row
                 counter = counter + 1
     
@@ -116,7 +141,7 @@ def search():
         index = 100-i
         if index in rowdict.keys():
             for row in rowdict[index]:
-                if tagval(row[5]):
+                if tagval(row[5]) and passtime(row[2], timecheck):
                     realdict[counter] = row
                     counter = counter + 1
                 if counter > 20:
