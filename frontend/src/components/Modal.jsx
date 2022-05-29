@@ -41,14 +41,41 @@ export default function Modal(props) {
                     </IngredientBox>
                 </IngredientAlign>
                 <Title>Directions</Title>
-                {props.recipe.directions.map((e) => {
-                    return (
-                        <div>
-                            {e}
-                        </div>
-                    )
-                })}
-
+                <DirContainer>
+                    <Directions>
+                        {props.recipe.directions.map((e) => {
+                            return (
+                                <Dir>
+                                    {e}
+                                </Dir>
+                            )
+                        })}{props.recipe.directions.map((e) => {
+                            return (
+                                <Dir>
+                                    {e}
+                                </Dir>
+                            )
+                        })}{props.recipe.directions.map((e) => {
+                            return (
+                                <Dir>
+                                    {e}
+                                </Dir>
+                            )
+                        })}{props.recipe.directions.map((e) => {
+                            return (
+                                <Dir>
+                                    {e}
+                                </Dir>
+                            )
+                        })}{props.recipe.directions.map((e) => {
+                            return (
+                                <Dir>
+                                    {e}
+                                </Dir>
+                            )
+                        })}
+                    </Directions>
+                </DirContainer>
             </ModalBox>
         </ModalContainer>
     )
@@ -78,6 +105,8 @@ const ModalBox = styled.div`
     padding-right: 36px;
     padding-left: 36px;
     position: relative;
+    display: flex;
+    flex-direction: column;
 `;
 
 const TimerBox = styled.div`
@@ -117,4 +146,18 @@ const Tagbar = styled.div`
     flex-direction: row;
     margin-top: -8px;
     margin-bottom: -8px;
+`;
+
+const DirContainer = styled.div`
+    flex: 1;
+    overflow-y: auto;
+`;
+
+const Directions = styled.ol`
+    margin-top: 0px;
+    font-size: 1.05em;
+`;
+
+const Dir = styled.li`
+    margin: 16px 0px;
 `;

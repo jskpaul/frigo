@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
-import styled, { keyframes } from "styled-components"
+import styled from "styled-components"
 
 import Title from "../shared/Title";
 import RecipeList from "./RecipeList";
 import Recipe from "./Recipe";
+import { fadeIn } from '../shared/animations';
 
 export default function Main(props) {
   return (
@@ -45,18 +45,6 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   overflow-y: hidden;
-`;
-
-const fadeIn = keyframes`
-  from {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-
-  to {
-    transform: translateY(0px);
-    opacity: 1;
-  }
 `;
 
 const VertAlign = styled.div`

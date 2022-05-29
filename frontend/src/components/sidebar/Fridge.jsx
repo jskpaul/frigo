@@ -13,6 +13,7 @@ export default function Fridge(props) {
                         removeItem={props.removeIngredient}
                         color={'e0eca9aa'}
                         remove
+                        animate
                     >
                         {e.val}
                     </Tag>
