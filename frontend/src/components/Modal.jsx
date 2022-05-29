@@ -43,33 +43,9 @@ export default function Modal(props) {
                 <Title>Directions</Title>
                 <DirContainer>
                     <Directions>
-                        {props.recipe.directions.map((e) => {
+                        {props.recipe.directions.map((e, i) => {
                             return (
-                                <Dir>
-                                    {e}
-                                </Dir>
-                            )
-                        })}{props.recipe.directions.map((e) => {
-                            return (
-                                <Dir>
-                                    {e}
-                                </Dir>
-                            )
-                        })}{props.recipe.directions.map((e) => {
-                            return (
-                                <Dir>
-                                    {e}
-                                </Dir>
-                            )
-                        })}{props.recipe.directions.map((e) => {
-                            return (
-                                <Dir>
-                                    {e}
-                                </Dir>
-                            )
-                        })}{props.recipe.directions.map((e) => {
-                            return (
-                                <Dir>
+                                <Dir key={i}>
                                     {e}
                                 </Dir>
                             )

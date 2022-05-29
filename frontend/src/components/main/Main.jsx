@@ -3,7 +3,7 @@ import styled from "styled-components"
 import Title from "../shared/Title";
 import RecipeList from "./RecipeList";
 import Recipe from "./Recipe";
-import FilterSearch from "./filter/FilterSearch";
+import FilterSearch from "./FilterSearch";
 
 import { fadeIn } from '../shared/animations';
 
@@ -13,9 +13,15 @@ export default function Main(props) {
       {props.ingredients
         ? <>
             <Title>Search Results</Title>
-            <FilterSearch></FilterSearch>
+            <FilterSearch
+              unselected={props.unselected}
+              tags={props.tags}
+              addTag={props.addTag}
+              removeTag={props.removeTag}
+            />
             <RecipeList>
-              {props.recipes.map((e, i) => {
+              {props.recipes
+              ? props.recipes.map((e, i) => {
                 return (
                   <Recipe
                     key={i}
@@ -25,7 +31,8 @@ export default function Main(props) {
                     toggleModal={props.toggleModal}
                   />
                 )
-              })}
+              })
+              : <Alert>No results found...</Alert>}
             </RecipeList>
           </>
         : <VertAlign>
@@ -55,4 +62,15 @@ const VertAlign = styled.div`
   align-items: center;
   height: 100%;
   animation: ${fadeIn} 1s ease-out;
+`;
+
+const Alert = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5em;
+  font-weight: 600;
+  color: #492220;
 `;
