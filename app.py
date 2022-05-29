@@ -19,6 +19,24 @@ cors = CORS(app)
 @app.route("/")
 def index():
     return "Hello World"
+
+@app.route('/alltags', methods=['GET'])
+def alltags():
+    conn = psycopg2.connect("postgresql://bkajobnssdigmz:9b2d5a529654f5da198abae2da464742c6f0525d4c52dc18c7041b5b5a3fd61b@ec2-44-196-223-128.compute-1.amazonaws.com:5432/de246nvqoro4o6", sslmode='require')
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM recipes")
+    rows = cursor.fetchall()
+    rowdict = dict()
+    for row in rows:
+        row=row[5]
+        newr = row[2:-2]
+        row = newr.split("', '")
+        for item in row:
+            if item not in rowdict.keys():
+                rowdict[item] = " "
+        
+    return rowdict
+
 @app.route('/search',methods=['GET'])
 def search():
     ingcheck =request.args.get("ingredients")
@@ -103,4 +121,4 @@ def search():
                     counter = counter + 1
                 if counter > 20:
                     return realdict
-    return {}
+    return realdict
