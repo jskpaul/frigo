@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 
 import Title from "../shared/Title";
 import RecipeList from "./RecipeList";
@@ -11,37 +11,34 @@ export default function Main(props) {
   return (
     <Wrapper>
       {props.ingredients
-        ? (props.loading
-          ? <VertAlign>
-              <Title>Loading...</Title>
-            </VertAlign>
-          : <>
-              <Title>Search Results</Title>
-              <FilterSearch
-                unselected={props.unselected}
-                tags={props.tags}
-                addTag={props.addTag}
-                removeTag={props.removeTag}
-                clearAll={props.clearAll}
-              />
-              <RecipeList>
-                {props.recipes.length
+        ? <>
+            <Title>Search Results</Title>
+            <FilterSearch
+              unselected={props.unselected}
+              tags={props.tags}
+              addTag={props.addTag}
+              removeTag={props.removeTag}
+              clearAll={props.clearAll}
+            />
+            <RecipeList>
+              {(props.loading)
+              ? <VertAlign><Title>Loading...</Title></VertAlign>
+              : (props.recipes.length
                 ? props.recipes.map((e, i) => {
-                  return (
-                    <Recipe
-                      key={i}
-                      index={i}
-                      data={e}
-                      setIndex={props.setIndex}
-                      toggleModal={props.toggleModal}
-                    />
-                  )
-                })
-                : <Alert>No results found...</Alert>}
-              </RecipeList>
-            </>
-          )
-        : <VertAlign>
+                    return (
+                      <Recipe
+                        key={i}
+                        index={i}
+                        data={e}
+                        setIndex={props.setIndex}
+                        toggleModal={props.toggleModal}
+                      />
+                    )
+                  })
+                : <Alert>No results found...</Alert>)}
+            </RecipeList>
+          </>
+        : <VertAlign slide>
             <Title>Enter your ingredients</Title>
           </VertAlign>
       }
@@ -66,8 +63,9 @@ const Wrapper = styled.div`
 const VertAlign = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   height: 100%;
-  animation: ${fadeIn} 1s ease-out;
+  animation: ${props => props.slide ? css`${fadeIn} 1s ease-out` : 'none'};
 `;
 
 const Alert = styled.div`

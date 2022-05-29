@@ -11,15 +11,24 @@ export default function App() {
   const [state, setState] = useState({
     ingredients: [],
     tags: [],
-    allRecipes: [],
     recipes: [],
     index: 0,
-    unselected: ['test1', 'test2', 'test2 5', 'z', 'bruh', 'what', '3432', 'hmmmm', 'ok'],
+    unselected: [],
     displayModal: false,
     clear: false,
     refresh: false,
     loading: false,
   });
+
+  useEffect(() => {
+    baseApi.get(`alltags`)
+      .then(res => {
+        setState(prevState => ({
+          ...prevState,
+          unselected: Object.keys(res.data),
+        }));
+      })
+  }, []);
 
   useEffect(() => {
     setState(prevState => ({
@@ -31,16 +40,27 @@ export default function App() {
       let i = resString.replaceAll('"', '`');
       i = i.replace("['", '["');
       i = i.replace("']", '"]');
+      i = i.replace("[`", '["');
+      i = i.replace("`]", '"]');
       i = i.replaceAll(`', '`, '", "');
-      i = i.replaceAll(`", '`, '", "');
-      i = i.replaceAll(`', "`, '", "');
+      i = i.replaceAll("`, '", '", "');
+      i = i.replaceAll("', `", '", "');
+      i = i.replaceAll('`', `\\\"`);
       return JSON.parse(i);
     }
 
-    baseApi.get(`search`, {
-      params: {'ingredients': state.ingredients.map((e) => {
+    let params = {
+      'ingredients': state.ingredients.map((e) => {
         return e.val;
-      }).join()}
+      }).join(),
+    };
+
+    if (state.tags.length) {
+      params['tags'] = state.tags.join();
+    }
+
+    baseApi.get(`search`, {
+      params: params,
     })
     .then(res => {
       let temp = [];
@@ -58,35 +78,18 @@ export default function App() {
       }
       setState(prevState => ({
         ...prevState,
-        allRecipes: temp,
+        recipes: temp,
+        loading: false,
       }));
     })
     .catch(e => {
       setState(prevState => ({
         ...prevState,
+        recipes: [],
         loading: false,
       }))
     });
-  }, [state.ingredients]);
-
-  useEffect(() => {
-    let temp = state.allRecipes.slice();
-    for (let i = temp.length - 1; i >= 0; i--) {
-      for (let j = 0; j < state.tags.length; j++) {
-        if (!temp[i].tags.includes(state.tags[j])) {
-          temp.splice(i, 1);
-          break;
-        }
-      }
-    }
-
-    setState(prevState => ({
-      ...prevState,
-      recipes: temp,
-      loading: false,
-    }));
-    //let r = allRecipes.filter(e => e.tags.includes)
-  }, [state.allRecipes, state.tags])
+  }, [state.ingredients, state.tags]);
 
   const toggleModal = () => {
     setState(prevState => ({

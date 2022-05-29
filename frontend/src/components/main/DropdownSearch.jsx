@@ -13,8 +13,6 @@ export default function DropdownSearch(props) {
       if (matches.length) {
         handleMouse(matches[0]);
       }
-      setFocus(false);
-      e.target.blur();
     }
   }
 
