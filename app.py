@@ -4,15 +4,19 @@ from flask import Flask, jsonify, request
 import sys
 import math
 from urllib.parse import urlparse
+from sqlalchemy import create_engine
+from sqlalchemy.orm import scoped_session, sessionmaker
 
 app = Flask(__name__)
 
   
 
-conn = psycopg2.connect("dbname=smallrecipes user=postgres password=4385")
-cursor = conn.cursor()
-cursor.execute("SELECT * FROM smallrecipe")
-rows = cursor.fetchall()
+#conn = psycopg2.connect("dbname=smallrecipes user=postgres password=4385")
+#cursor = conn.cursor()
+#cursor.execute("SELECT * FROM smallrecipe")
+#rows = cursor.fetchall()
+
+
 @app.route("/")
 def index():
     return "Hello World"
@@ -24,7 +28,7 @@ def search():
     ingredlist = ingredients.split(",")
     ingdict = dict()
     for ing in ingredlist: ingdict[ing.replace("%20", " ")] = "Yeeet"
-    
+    '''
     result = urlparse("postgresql://bkajobnssdigmz:9b2d5a529654f5da198abae2da464742c6f0525d4c52dc18c7041b5b5a3fd61b@ec2-44-196-223-128.compute-1.amazonaws.com:5432/de246nvqoro4o6")
     username = result.username
     password = result.password
@@ -40,8 +44,8 @@ def search():
         port = port
     )
     '''
-    conn = psycopg2.connect("dbname=recipes user=postgres password=4385")
-    '''
+    conn = psycopg2.connect("postgresql://bkajobnssdigmz:9b2d5a529654f5da198abae2da464742c6f0525d4c52dc18c7041b5b5a3fd61b@ec2-44-196-223-128.compute-1.amazonaws.com:5432/de246nvqoro4o6", sslmode='require')
+    
     cursor = conn.cursor()
 
 
