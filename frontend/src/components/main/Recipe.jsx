@@ -13,7 +13,12 @@ export default function Recipe(props) {
       <TextContainer>
         <Header>title: {props.data.title}</Header>
         <FlavorText>
-          Ingredients: {props.data.ingredients}
+          Ingredients: {
+            props.data.ingredients.map((e, i) => {
+              let commaSeparation = i == 0 ? '' : ', ';
+              return commaSeparation + e;
+            })
+          }
         </FlavorText>
       </TextContainer>
       <Timer minutes={props.data.minutes} />

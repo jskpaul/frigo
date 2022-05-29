@@ -1,6 +1,8 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import close from '../resources/close.svg';
+
+import { onlyFade } from './animations';
 
 export default function Tag(props) {
   const handleClick = () => {
@@ -9,7 +11,7 @@ export default function Tag(props) {
 
   return (
     <Holder>
-      <StyledTag color={props.color}>
+      <StyledTag color={props.color} animate={props.animate}>
         <Text>
           {props.children}
         </Text>
@@ -37,6 +39,7 @@ const StyledTag = styled.div`
   display: flex;
   align-items: center;
   width: fit-content;
+  animation: ${props => props.animate ? css`${onlyFade} 0.5s ease` : 'none'};
 `;
 
 const Text = styled.div`
