@@ -30,6 +30,7 @@ def search():
     port = result.port
 
     conn = psycopg2.connect(
+        dbname = 'recipe',
         database = database,
         user = username,
         password = password,
