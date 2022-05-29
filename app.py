@@ -3,10 +3,6 @@ import psycopg2
 from flask import Flask, jsonify, request
 import sys
 import math
-from urllib.parse import urlparse
-from sqlalchemy import create_engine
-from sqlalchemy.orm import scoped_session, sessionmaker
-
 app = Flask(__name__)
 
   
