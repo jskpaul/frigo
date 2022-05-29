@@ -9,9 +9,9 @@ app = Flask(__name__)
 
   
 
-conn = psycopg2.connect("dbname=recipes user=postgres password=4385")
+conn = psycopg2.connect("dbname=smallrecipes user=postgres password=4385")
 cursor = conn.cursor()
-cursor.execute("SELECT * FROM recipes")
+cursor.execute("SELECT * FROM smallrecipe")
 rows = cursor.fetchall()
 
 @app.route('/search', methods=['GET'])
@@ -22,6 +22,7 @@ def search():
     ingredlist = ingredients.split(",")
     ingdict = dict()
     for ing in ingredlist: ingdict[ing.replace("%20", " ")] = "Yeeet"
+    '''
     result = urlparse("postgresql://bkajobnssdigmz:9b2d5a529654f5da198abae2da464742c6f0525d4c52dc18c7041b5b5a3fd61b@ec2-44-196-223-128.compute-1.amazonaws.com:5432/de246nvqoro4o6")
     username = result.username
     password = result.password
@@ -36,6 +37,8 @@ def search():
         host = hostname,
         port = port
     )
+    '''
+    conn = psycopg2.connect("dbname=recipes user=postgres password=4385")
 
     cursor = conn.cursor()
 
@@ -64,9 +67,10 @@ def search():
 
     realdict = dict()
     counter = 0
-    for row in rowdict[100]:
-        realdict[counter]=row
-        counter = counter + 1
+    if 100 in rowdict.keys():
+        for row in rowdict[100]:
+            realdict[counter]=row
+            counter = counter + 1
     
     if counter > 5:
         return realdict
